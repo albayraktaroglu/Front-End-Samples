@@ -1,0 +1,45 @@
+.div-container-box{
+    margin: 10px;
+    padding: 5px;
+    
+    width: 500px;
+    height: 400px;
+}
+
+.radius{
+    border: 2px solid #a1a1a1;
+    border-radius: 10px; 
+}
+
+
+body button{
+    background-color:a1a1a1;
+    border-radius: 5px;
+    height: 30px;
+    width: 100px;
+}
+
+
+
+#title{
+    display: inline-block;
+    width: 160px;
+    margin: 30px;
+    position:relative;
+    left: -20px;
+}
+
+#span{
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    
+    border: 2px solid #a1a1a1;
+    border-radius: 10px;
+    
+    height: 120px;
+    padding: 10px;
+}
+
+
+
