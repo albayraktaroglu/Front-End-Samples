@@ -12,6 +12,10 @@ body {
       margin: auto;
     }
 
+    #checkbx{
+        display: inline-block;
+    }
+
     header {
       overflow: clear;
       position: relative;

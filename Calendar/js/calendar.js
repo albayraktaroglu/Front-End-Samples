@@ -12,55 +12,86 @@ var clickeditemval = -1;
 
 $(document).ready(function(){
     
+    $( "input[type=checkbox]" ).on( "click", function(){
+        if( date[0] == -1 ){
+            alert('Please select a start date !');
+        }
+        else{
+            var daterange = new Array(31).fill(0);;
+            date[1] = clickeditemval;
+            for(var i = date[0] ; i<= 31; i++){
+                daterange[i] = i;
+            }
+
+            $('table td').each(function(){
+                if( $.isNumeric( daterange[Number($(this).text())] ) && daterange[Number($(this).text())] != 0 ){
+                         $(this).addClass('selected');
+                } 
+            });
+            
+            PrintDates(date[0],"31");
+
+
+            // reset start and end point 
+            date = [-1, -1]; 
+            $('table td').each(function(){
+               $(this).removeClass('removeClass');
+            });
+        }
+    }); 
+    
+    $('#btnrefresh').click(function(){
+       location.reload(); 
+    });
     
     $('table td').click(function () {
-
-        
         item = $(this);     
         clickeditemval = Number( $(this).text() ) ;
         alert(clickeditemval);
 
-       if($.isNumeric(clickeditemval) && clickeditemval < 32 && clickeditemval > 0){
+        if(clickeditemval == 0){
+                       alert(" Please click on a valid day! ");
+            }
+        else{
+                  if($.isNumeric(clickeditemval) && clickeditemval < 32 && clickeditemval > 0){
 
-           if(date[0] == -1 ){
-               date[0] = clickeditemval;
-                item.css("background","#f0951d") 
-                    .css("border","0")
-                    .css("box-shadow","0 2px 6px rgba(0, 0, 0, .5) inset")
-                alert("hey");
-           }
-           else{
-               var daterange = new Array(31).fill(0);;
-               date[1] = clickeditemval;
-               for(var i = date[0] ; i<= date[1] ; i++){
-                    daterange[i] = i;
+                   if(date[0] == -1 ){
+                       date[0] = clickeditemval;
+                       item.addClass('selected');
+                   }
+                   else{
+                       var daterange = new Array(31).fill(0);;
+                       date[1] = clickeditemval;
+                       for(var i = date[0] ; i<= date[1] ; i++){
+                            daterange[i] = i;
+                       }
+
+                       $('table td').each(function(){
+                            if( $.isNumeric( daterange[Number($(this).text())] ) && daterange[Number($(this).text())] != 0 ){
+                                   $(this).addClass('selected');
+                            } 
+                        });
+
+
+                       // reset start and end point 
+                       date = [-1, -1]; 
+                       $('table td').each(function(){
+                           $(this).removeClass('removeClass');
+                       });
+
+                   }
                }
-               
-               $('table td').each(function(){
-                   
-                   
-                   if( $.isNumeric( daterange[Number($(this).text())] ) && daterange[Number($(this).text())] != 0 ){
-                       $(this).addClass('selected');
-                       /*$(this).css("background","#f0951d") 
-                                                .css("border","0")
-                                                .css("box-shadow","0 2px 6px rgba(0, 0, 0, .5) inset")*/
-                   } 
-               });
-                 
-               
-               // reset start and end point 
-               date = [-1, -1]; 
-               $('table td').each(function(){
-                   $(this).removeClass('removeClass');
-               });
-               
-           }
-       }
-        
-        
+            }
     });
     
 });
+
+
+function PrintDates(start, end){
+    $('#startdate').text(start+" September 2016");
+    $('#enddate').text(end+" September 2016");
+    
+}
 
            
       
