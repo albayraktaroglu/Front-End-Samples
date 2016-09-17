@@ -50,11 +50,14 @@ $(document).ready(function(){
         alert(clickeditemval);
 
         if(clickeditemval == 0){
-                       alert(" Please click on a valid day! ");
-            }
+            alert(" Please click on a valid day! ");
+        }
         else{
-                  if($.isNumeric(clickeditemval) && clickeditemval < 32 && clickeditemval > 0){
+            if($.isNumeric(clickeditemval) && clickeditemval < 32 && clickeditemval > 0){
 
+                    Cleaning();
+                
+                
                    if(date[0] == -1 ){
                        date[0] = clickeditemval;
                        item.addClass('selected');
@@ -62,26 +65,34 @@ $(document).ready(function(){
                    else{
                        var daterange = new Array(31).fill(0);;
                        date[1] = clickeditemval;
-                       for(var i = date[0] ; i<= date[1] ; i++){
-                            daterange[i] = i;
+                       
+                       // client can not select earlier date 
+                       if( Number(date[1]) - Number(date[0]) < 0 ){
+                           alert("End date must be a later date !")
+                           location.reload(); 
                        }
+                       else{
+                           for(var i = date[0] ; i<= date[1] ; i++){
+                            daterange[i] = i;
+                           }
 
-                       $('table td').each(function(){
-                            if( $.isNumeric( daterange[Number($(this).text())] ) && daterange[Number($(this).text())] != 0 ){
-                                   $(this).addClass('selected');
-                            } 
-                        });
+                           $('table td').each(function(){
+                                if( $.isNumeric( daterange[Number($(this).text())] ) && daterange[Number($(this).text())] != 0 ){
+                                       $(this).addClass('selected');
+                                } 
+                            });
 
+                           PrintDates(date[0],date[1]);
 
-                       // reset start and end point 
-                       date = [-1, -1]; 
-                       $('table td').each(function(){
-                           $(this).removeClass('removeClass');
-                       });
-
+                           // reset start and end point 
+                           date[1] = [-1]; 
+                           $('table td').each(function(){
+                               $(this).removeClass('removeClass');
+                           });
+                        }
                    }
                }
-            }
+        }
     });
     
 });
@@ -91,6 +102,12 @@ function PrintDates(start, end){
     $('#startdate').text(start+" September 2016");
     $('#enddate').text(end+" September 2016");
     
+}
+
+function Cleaning(){
+    $('table td').each(function(){
+       $(this).removeClass('selected'); 
+    });
 }
 
            
