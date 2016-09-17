@@ -12,5 +12,12 @@ DEMO: https://jsfiddle.net/albayraktar/hmqqmztt/
 ![Question](https://dl.dropboxusercontent.com/u/32377361/Misc/InterviewQuestionImage.png)
 
 
+#Exercise 2 
+
+Designed custom made calendar with HTML, JavaScript, jQuesry and CSS
+
+![](https://github.com/albayraktaroglu/Front-End-Samples/blob/master/Calendar/result/Calendar.PNG)
+
+
 
 
